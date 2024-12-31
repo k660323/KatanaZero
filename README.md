@@ -176,96 +176,51 @@ BaseState 함수
 
 [Stat.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Stat/Stat.cs)
 
-
 <br>
 
 ---
 
 <br>
 
-#### **파티 시스템**
-+ Party
-  + 유저와 파티를 맺어 같이 던전에 입장 하도록 하는 기능 수행
+#### **무기**
++ Weapon
+  + Creature가 사용할 무기를 정의하는 클래스
 
-
-**파티 초대 과정**
-1. UI_Party를 열고 만들기 버튼을 눌러 서버 함수인 CTS_CreateParty()를 서버에게 호출 하도록 요청합니다.
-2. 서버에서 CTS_CreateParty() 호출하여 해당 파티를 창설합니다.
-3. 상대 플레이어 캐릭터에 마우스를 대고 클릭
-4. PlayerController에서 OnPlayerCilcked 함수가 콜백 호출되어 Raycast를 수행한다.
-5. Hit 오브젝트가 있고 플레이어이나 로컬 플레이어가 아니면 PlayerUI 멤버변수인 UI_Interaction을 띄운다. 
-
-[UI_Interaction.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/UI/SubItem/UI_Interaction.cs)
-
-
-6. 파티요청 버튼을 클릭하면 해당 버튼에 바인딩된 함수를 호출하여 조건 충족시 서버 함수인 CTS_PartyApplication()를 호출 하도록 요청합니다.
-7. CTS_PartyApplication() 함수를 호출하는 서버는 해당 유저의 파티 여부를 확인후 없으면 해당 유저에게 파티 요청에 대한 UI를 띄우도록 RPC_ShowPartyInvitation 함수를 RPC 합니다.
-8. 서버의 RPC 요청을 받은 클라이언트는 UI_PartyInvitation를 화면에 띄웁니다.
-
-[UI_PartyInvitation.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/UI/Popup/UI_PartyInvitation.cs)
-
-
-9. 해당 UI는 초대자의 이름으로 파티 요청에 대한 정보며 수락/취소가 가능합니다.
-10. 수락시 수락한 플레이어의 파티 클래스에서 서버 함수인 CTS_RequestJoinPart() 함수를 서버에게 호출하도록 요청합니다.
-11. 서버에서는 수락한 플레이어의 파티 클래스의 CTS_RequestJoinPart()를 실행하며 매개변수로 들어온 파티장의 파티 객체의 JoinParty()에 수락한 플레이어를 매개변수로 넣오 파티에 참가 시킵니다.
-12. JoinParty()는 각 파티원에게 Party객체에 접근하여 참가자의 정보를 partDic 자료구조에 저장합니다. 그리고 새로운 참가자의 Party객체에 파티원 목록을 넣어주면 파티 초대가 완료 됩니다.
-
-
-**파티 탈퇴 과정**
-1. 클라이언트에서 파티 탈퇴 버튼을 누르면 서버 함수인 CTS_ResignPlayerToParty() 호출 하도록 요청합니다.
-2. 요청받은 서버는 CTS_ResignPlayerToParty()를 호출 하며 대상 플레이어 객체의 Party객체의 partyDic에서 해당 플레이어의 제거하고 서버함수인 CTS_SecessionParty()를 호출합니다.
-3. 파티가 없으면 return을 수행 합니다.
-4. 탈퇴한 유저가 만약 파티장이면 파티원에게 해당 파티가 사라짐을 알리기 위해 partDic 변수를 초기화 시킵니다.
-5. 파티장이 아니면 모든 파티원에게 해당 플레이어가 사라짐을 알리기 위해 모든 파티원의 partDic 변수에 해당 파티원을 제거합니다.
-
-[Party.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/Contents/Party/Party.cs)
-
-<br>
-
----
-
-<br>
-
-#### **인벤토리**
-+ Inventory
-  + 플레이어가 소유한 아이템 데이터를 관리하는 클래스
-
-[Inventory.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/Contents/Inventory/Inventory.cs)
-
-
-+ UI_Inventory
-  + 플레이어가 소유한 아이템을 시각화 하여 보여주는 UI
-  + 아이템과 상호작용 가능
+[Weapon.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Weapon/Weapon.cs)
     
-[UI_Inventory.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/UI/SubItem/UI_Inventory.cs)
-
-     
-+ Item
-  + 아이템 메타 데이터를 정의하는 클래스
-  + 모든 아이템은 상위 클래스 Item을 상속받아 구현
-
-[Item](https://github.com/k660323/BossHunter/tree/main/Scripts/Contents/Item)  
-
-
 <br>
 
 ---
 
 <br>
 
-#### **장비창**
-+ Equipment
-  + 플레이어가 장착한 장비 데이터를 관리하는 클래스
-  + 장착시 아이템 정보에 따라 해당 능력치 콜백 방식으로 반영
-  + Equipment를 상속받은 아이템에 한해서 장착 가능
-  + 장착 부위들을 Enum 구현하여 Func 배열을 통해 Enum값에 따른 콜백 기능 구현
-[Equipment.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/Contents/Weapon/EquipmentManager.cs)
+#### **투사체**
++ Projectile
+  + 원거리 발사 오브젝트들을 해당 클래스를 상속받는다.
 
 
-+ UI_Equipment
-  + 플레이어가 장착한 장비 데이터를 시각화 하여 UI에 표시하는 클래스
- 
-[UI_Equipment.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/UI/SubItem/UI_Inventory.cs)
+    
+<br>
+
+---
+
+<br>
+
+#### **애니메이션 이벤트**
++ AiAnimationEvent
+  + 애니메이션에 맞게 이벤트를 발생시키고자 할때 사용하는 클래스
+  + 근접 판정 시작과 끝, 원거리 공격, 공격 애니메이션 끝, 장전 콜백함수 구현
+
+[AiAnimationEvent.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/AnimationEvent/AiAnimationEvent.cs)
+
+<br>
+
++ KissfaceAnimationEvent
+  + 보스 클래스에서 사용하는 애니메이션 이벤트
+  + AiAnimationEvent을 상속받아 확장
+  + 무기 던지기, 무기 잡기 등 추가 행위 작성
+
+[KissfaceAnimationEvent.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/AnimationEvent/KissfaceAnimationEvent.cs)
 
 <br>
 
@@ -274,19 +229,7 @@ BaseState 함수
 <br>
 
 #### **기타**
-+ UI_Chat
-  + 채팅 오브젝트
-  + InputField에 보낼 텍스트를 입력 후 전송시, 포멧으로 플레이어 닉네임 삽입 후 씬에 BaseSceneNetwork를 상속받은 클래스를 찾아 IChatable인터페이스를 상속받은지 확인한다.
-  + 상속받았을 경우 리플렉션이[Command]인 CTS.ChatRPC 함수를 호출하여 해당씬에 존재하는 플레이어에게 채팅 메시지를 전송합니다.
-    
-[UI_Chat.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/UI/Scene/UI_Chat.cs)
 
-
-+ UI_PlayerUI
-  + 환경 설정, 인벤토리, 능력치, 파티 등 플레이어에 관련된 UI를 접근하게 하는 클래스
-    
-[UI_PlayerUI.cs](https://github.com/k660323/BossHunter/blob/main/Scripts/UI/Scene/UI_PlayerUI.cs)
-     
 
 <br>
 
