@@ -92,7 +92,18 @@
 + MapManager
   + A*를 사용하기위한 맵 정보와 관련된 기능을 제공하는 매니저
 
+**핵심 함수**
+LoadMap - 해당 씬에 맞는 데이터를 불러와 변수에 기록합니다.
+FindPath -현재 맵 정보와 시작 지점, 목표 지점을 통해 최단 경로 a*를 수행합니다.
+CalcCellPathFromParent - A* 결과로 나온 parent 함수를 통해 최단 경로를 만들어 반환합니다.
+Cango - 해당 위치 이동 가능 여부를 확인하는 함수 입니다.
+    
 [MapManager.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Manager/MapManager.cs)
+
++ AStarLoad
+  + 각 씬마다 존재하며 해당 씬 이름에 맞는 맵 데이터를 불러오도록 MapManager의 LoadMap 함수에 맵 이름을 매개변수를 넣어 호출합니다.
+
+[AStarLoad.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Scene/AStarLoad.cs)
 
 <br>
 
