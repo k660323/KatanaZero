@@ -240,7 +240,10 @@ BaseState 함수
 <br>
 
 #### **기타**
-
++ Define
+  + StateMahcine에서 현재 State를 쉽게 구분 하기 위해 enum 자료형의 State 정의
+    
+[Define.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Define.cs)
 
 <br>
 
