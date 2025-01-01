@@ -70,13 +70,14 @@
 #### **코어 매니저**
 
 + Managers - 매니저들을 관리하는 매니저 클래스
+  + Scene 이동시 ObjectPooling 오브젝트들을 모두 제거
 
 [Managers.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Manager/Managers.cs)
 
 <br>
 
 + ResourceManager - 리소스 매니저
-
+  
 [ResourceManager.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Manager/ResourceManager.cs)
 
 <br>
@@ -196,8 +197,13 @@ BaseState 함수
 #### **무기**
 + Weapon
   + Creature가 사용할 무기를 정의하는 클래스
-
+  + Weapon클래스를 상속받는 근거리 무기 Melee, 원거리 무기 Range, 공통적인 부분은 Weapon 세세한 부분은 자식 클래스에서 구현
+    
 [Weapon.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Weapon/Weapon.cs)
+
+[Melee.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Weapon/Melee.cs)
+
+[Range.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Weapon/Range.cs)
     
 <br>
 
@@ -207,10 +213,28 @@ BaseState 함수
 
 #### **투사체**
 + Projectile
-  + 원거리 발사 오브젝트들을 해당 클래스를 상속받는다.
+  + 원거리 발사 오브젝트들을 해당 클래스를 상속받아 구현
 
+[Porjectile.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Range/Projectile.cs)
 
-    
++ Bullet
+  + Projectile을 상속받으며 일정시간동안 목표물에 피격할때 까지 해당 방향으로 이동하는 오브젝트
+  + IReflectable을 상속받아 플레이어가 타이밍에 맞게 공격시 Bullet을 반대 방향으로 전환시킬 수 있다. 
+
+[Bullet.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Range/Bullet.cs)
+
++ Axe
+  + KissfaceEnemy 보스 몬스터가 사용하는 투척용 도끼
+  + Projectile을 상속받으며 일정 거리를 이동 후 다시 돌아오는 오브젝트
+
+[Axe.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Range/Axe.cs)
+
++ JumpSwingAxe
+  + KissfaceEnemy 보스 몬스터가 사용하는 회전 도끼
+  + Projectile을 상속받으며 JumpSwingAxeHit(도끼)를 소환하며 보스 몬스터를 주위를 일정시간 동안 회전 하는 오브젝트
+
+[JumpSwingAxe](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Range/JumpSwingAxe.cs)
+
 <br>
 
 ---
