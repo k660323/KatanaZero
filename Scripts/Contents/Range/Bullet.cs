@@ -1,37 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Projectile, IReflectable
 {
-    protected int _enemyLayer;
-
-    public int EnemyLayer { get { return _enemyLayer; } }
-
-    public Creature _owner;
-
-    protected Collider2D col;
-
-    // 총알 방향
-    protected Vector3 _dir;
-    // 이동 속도    
-    [SerializeField]
-    protected float _moveSpeed;
-
-
     // 생명주기 코루틴
     protected IEnumerator _lifeTimeCor;
     // 생명 주기
     [SerializeField]
     protected float _lifeTime;
 
-    private void Awake()
-    {
-        TryGetComponent(out col);
-    }
-
-    public void SetProjectile(Vector2 startPos, Vector2 dir, int enemyLayer, Creature owner)
+    public override void SetProjectile(Vector2 startPos, Vector2 dir, int enemyLayer, Creature owner)
     {
         transform.position = startPos;
         _dir = dir;
@@ -81,7 +59,7 @@ public class Bullet : MonoBehaviour
         DestroyProjectile();
     }
 
-    public void DestroyProjectile()
+    public override void DestroyProjectile()
     {
         if (gameObject.activeInHierarchy == false)
             return;
@@ -94,7 +72,7 @@ public class Bullet : MonoBehaviour
         Managers.Resource.Destory(gameObject);
     }
 
-    public void ReflectDir(int layer)
+    public virtual void ReflectDir(int layer)
     {
         if (gameObject.activeInHierarchy == false)
             return;

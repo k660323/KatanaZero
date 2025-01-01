@@ -2,30 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpSwingAxe : MonoBehaviour
+public class JumpSwingAxe : Projectile
 {
-    protected int _enemyLayer;
-
-    public int EnemyLayer { get { return _enemyLayer; } }
-
-    public Creature _owner;
-
-    protected Collider2D col;
-
-    // 총알 방향
-    protected Vector3 _dir;
-    // 이동 속도    
-    [SerializeField]
-    protected float _moveSpeed;
-
     float rotateZ;
 
-    private void Awake()
-    {
-        col = transform.GetComponentInChildren<Collider2D>();
-    }
 
-    public void SetProjectile(Vector2 startPos, Vector2 dir, int enemyLayer, Creature owner)
+
+    public override void SetProjectile(Vector2 startPos, Vector2 dir, int enemyLayer, Creature owner)
     {
         transform.position = startPos;
         transform.rotation = Quaternion.identity;
@@ -43,7 +26,7 @@ public class JumpSwingAxe : MonoBehaviour
             DestroyProjectile();
     }
 
-    public void DestroyProjectile()
+    public override void DestroyProjectile()
     {
         if (gameObject.activeInHierarchy == false)
             return;

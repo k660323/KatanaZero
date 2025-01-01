@@ -60,6 +60,7 @@ public class AiAnimationEvent : MonoBehaviour
 
     public void OnReloadSound()
     {
-        creature.GetWeapon.PlayReloadSound();
+        if (creature.GetWeapon is Range range)
+            range.PlayReloadSound();
     }
 }

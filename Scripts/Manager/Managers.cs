@@ -25,26 +25,12 @@ public class Managers : Singleton<Managers>
             GameObject go = gameObject.transform.GetChild(i).gameObject;
             if (go.activeInHierarchy)
             {
-                if (go.TryGetComponent(out Bullet bullet))
-                {
-                    bullet.DestroyProjectile();
-                }
-                else if(go.TryGetComponent(out Axe axe))
-                {
-                    axe.DestroyProjectile();
-                }
-                else if(go.TryGetComponent(out JumpSwingAxe jumpAxe))
-                {
-                    jumpAxe.DestroyProjectile();
-                }
+                if (go.TryGetComponent(out Projectile projectile))
+                    projectile.DestroyProjectile();
                 else if(go.TryGetComponent(out Effect effect))
-                {
                     effect.OnEffectFinished();
-                }
                 else
-                {
                     resource.Destory(gameObject.transform.GetChild(i).gameObject);
-                }
             }
         }
     }
