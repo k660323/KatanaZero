@@ -66,7 +66,7 @@
 
 대부분 유니티 프로젝트에서 사용되고 자주 사용하는 기능들을 구현하여 싱글톤 클래스인 Managers에서 접근할 수 있도록 구현
       
-#### **코어 매니저**
+### **코어 매니저**
 
 + Managers - 매니저들을 관리하는 매니저 클래스
   + Scene 이동시 ObjectPooling 오브젝트들을 모두 제거
@@ -87,18 +87,24 @@
 
 <br>
         
-#### **컨텐츠 매니저**
+### **컨텐츠 매니저**
 
 + MapManager
   + A*를 사용하기위한 맵 정보와 관련된 기능을 제공하는 매니저
 
 **핵심 함수**
+
 LoadMap - 해당 씬에 맞는 데이터를 불러와 변수에 기록합니다.
+
 FindPath -현재 맵 정보와 시작 지점, 목표 지점을 통해 최단 경로 a*를 수행합니다.
+
 CalcCellPathFromParent - A* 결과로 나온 parent 함수를 통해 최단 경로를 만들어 반환합니다.
+
 Cango - 해당 위치 이동 가능 여부를 확인하는 함수 입니다.
     
 [MapManager.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Manager/MapManager.cs)
+
+<br>
 
 + AStarLoad
   + 각 씬마다 존재하며 해당 씬 이름에 맞는 맵 데이터를 불러오도록 MapManager의 LoadMap 함수에 맵 이름을 매개변수를 넣어 호출합니다.
@@ -132,12 +138,14 @@ Cango - 해당 위치 이동 가능 여부를 확인하는 함수 입니다.
 [KissfaceEnemy](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/Creature/KissfaceEnemy.cs)
 
 <br>
-<br>
 
-##### **StateMachine**
+---
+
+##### **AI 로직**
 + StateMachine
   + 행위(상태)를 관리하는 컨트롤러
   + 상태 등록, 삭제, 상태 전환 및 현제 상태에 대한 로직을 수행합니다.
+  + Creature를 상속받은 클래스가 상태 초기화 등록을 수행합니다.
 
 [StateMachine.cs](https://github.com/k660323/KatanaZero/blob/main/Scripts/Contents/StateMachine/StateMachine.cs)
 
