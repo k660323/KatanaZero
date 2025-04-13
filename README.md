@@ -295,3 +295,6 @@ BaseState 함수
 
 ## 7. 플레이 영상
 + https://www.youtube.com/watch?v=TcZmbVpudik
+
+## 8. PDF
++ https://github.com/k660323/KatanaZero/blob/main/PDF/KatanaZeroPPT.pdf
